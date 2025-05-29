@@ -8,31 +8,19 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-@Data
-public class CartItem {
+public class Deal {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne
-    private Cart cart;
+    private Integer discount;
 
-    @ManyToOne
-    private  Product product;
-
-    private String size;
-
-    private int quantity=1;
-
-    private  Integer mrpPrice;
-
-    private Integer sellingPrice;
-
-    private Long UserId;
-
-
+    @OneToOne
+    private HomeCategory category;
 }

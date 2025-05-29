@@ -25,6 +25,7 @@ public class WishList {
     @OneToOne
     private User user;
 
-    @ManyToOne
-    private Set<Product> products= new HashSet<>();
+    @OneToMany
+    @JoinColumn(name = "wishlist_id")
+    private Set<Product> products = new HashSet<>();
 }

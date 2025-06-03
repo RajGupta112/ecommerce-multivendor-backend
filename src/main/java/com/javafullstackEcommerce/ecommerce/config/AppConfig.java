@@ -35,7 +35,7 @@ public class AppConfig {
     }
 
     @Bean
-    private CorsConfigurationSource corsConfgurationSource() {
+    public CorsConfigurationSource corsConfgurationSource() {
         return new CorsConfigurationSource() {
             @Override
             public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
@@ -52,6 +52,7 @@ public class AppConfig {
         };
     }
 
+    @Bean
     PasswordEncoder passwordEncoder(){
         return  new BCryptPasswordEncoder();
     }

@@ -1,4 +1,7 @@
 package com.javafullstackEcommerce.ecommerce.service;
 
-public class AuthService {
+import com.javafullstackEcommerce.ecommerce.response.SignupRequest;
+
+public interface AuthService {
+    String createUser(SignupRequest req);
 }

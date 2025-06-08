@@ -1,5 +1,6 @@
 package com.javafullstackEcommerce.ecommerce.serviceImplimentation;
 
+import com.javafullstackEcommerce.ecommerce.controller.Seller;
 import com.javafullstackEcommerce.ecommerce.domain.USER_ROLE;
 import com.javafullstackEcommerce.ecommerce.modal.User;
 import com.javafullstackEcommerce.ecommerce.repository.SellerRepository;
@@ -16,6 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+
+@Service
 @RequiredArgsConstructor
 public class CustomUserServiceImplimentation implements UserDetailsService {
 
@@ -25,7 +28,12 @@ public class CustomUserServiceImplimentation implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         if(username.startsWith(SELLER_PREFIX)){
-            
+            String actualUserName=username.substring(SELLER_PREFIX.length()
+            );
+            Seller seller=sellerRepository.findByEmail(actualUserName);
+            if(seller!=null){
+                return buildUserDeatils(seller.getEmail(),seller.getPassword(),seller.getRole());
+            }
         }else {
             User user=userRepository.findByEmail(username);
             if(user!=null){

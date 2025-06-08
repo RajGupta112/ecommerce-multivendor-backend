@@ -31,7 +31,7 @@ public class AppConfig {
                 .csrf(csrf-> csrf.disable())
                 .cors(cors->cors.configurationSource(corsConfgurationSource()));
 
-                return null;
+                return httpSecurity.build();
     }
 
     @Bean

@@ -6,6 +6,7 @@ import com.javafullstackEcommerce.ecommerce.modal.VerificationCode;
 import com.javafullstackEcommerce.ecommerce.repository.UserRepository;
 import com.javafullstackEcommerce.ecommerce.response.ApiResponse;
 import com.javafullstackEcommerce.ecommerce.response.AuthResponse;
+import com.javafullstackEcommerce.ecommerce.response.LoginRequest;
 import com.javafullstackEcommerce.ecommerce.response.SignupRequest;
 import com.javafullstackEcommerce.ecommerce.service.AuthService;
 import lombok.RequiredArgsConstructor;
@@ -47,4 +48,15 @@ public class AuthController {
         res.setMessage("otp sent successfully");
         return ResponseEntity.ok((res));
     }
+
+
+    @PostMapping("/signing")
+    public ResponseEntity<AuthResponse> loginHandler(@RequestBody LoginRequest req) throws Exception{
+      AuthResponse authResponse=  authService.signing(req);
+      return ResponseEntity.ok(authResponse);
+
+
+
+    }
+
 }

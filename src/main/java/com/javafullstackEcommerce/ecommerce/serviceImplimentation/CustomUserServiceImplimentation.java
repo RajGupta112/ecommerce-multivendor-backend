@@ -25,6 +25,7 @@ public class CustomUserServiceImplimentation implements UserDetailsService {
     private final UserRepository userRepository;
     private static  final String SELLER_PREFIX="seller_";
     private final SellerRepository sellerRepository;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         if(username.startsWith(SELLER_PREFIX)){
@@ -46,7 +47,7 @@ public class CustomUserServiceImplimentation implements UserDetailsService {
     private UserDetails buildUserDeatils(String email, String password, USER_ROLE role) {
         if (role==null)role=USER_ROLE.ROLE_CUSTOMER;
         List<GrantedAuthority> authorityList=new ArrayList<>();
-        authorityList.add(new SimpleGrantedAuthority("role"+role));
+        authorityList.add(new SimpleGrantedAuthority(role.toString()));
         return new org.springframework.security.core.userdetails.User(email,password,authorityList);
     }
 }

@@ -1,11 +1,8 @@
-package com.javafullstackEcommerce.ecommerce.controller;
+package com.javafullstackEcommerce.ecommerce.modal;
 
 
 import com.javafullstackEcommerce.ecommerce.domain.AccountStatus;
 import com.javafullstackEcommerce.ecommerce.domain.USER_ROLE;
-import com.javafullstackEcommerce.ecommerce.modal.Address;
-import com.javafullstackEcommerce.ecommerce.modal.BankDetails;
-import com.javafullstackEcommerce.ecommerce.modal.BussinessDetails;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,6 +1,6 @@
 package com.javafullstackEcommerce.ecommerce.serviceImplimentation;
 
-import com.javafullstackEcommerce.ecommerce.controller.Seller;
+import com.javafullstackEcommerce.ecommerce.modal.Seller;
 import com.javafullstackEcommerce.ecommerce.domain.USER_ROLE;
 import com.javafullstackEcommerce.ecommerce.modal.User;
 import com.javafullstackEcommerce.ecommerce.repository.SellerRepository;

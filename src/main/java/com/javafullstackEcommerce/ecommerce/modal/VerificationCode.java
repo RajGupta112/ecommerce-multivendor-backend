@@ -1,7 +1,6 @@
 package com.javafullstackEcommerce.ecommerce.modal;
 
 
-import com.javafullstackEcommerce.ecommerce.controller.Seller;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

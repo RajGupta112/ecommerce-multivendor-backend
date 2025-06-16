@@ -51,6 +51,7 @@ public class AuthServiceImplimentation  implements AuthService {
     @Override
     public void sendLoginOtp(String email) throws Exception {
  String SIGNING_PREFIX="sign_in";
+// String SELLER_PREFIX="seller_";
  if(email.startsWith(SIGNING_PREFIX)){
      email=email.substring(SIGNING_PREFIX.length());
      User user= userRepository.findByEmail(email);

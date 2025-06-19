@@ -4,10 +4,7 @@ import com.javafullstackEcommerce.ecommerce.domain.USER_ROLE;
 import com.javafullstackEcommerce.ecommerce.modal.User;
 import com.javafullstackEcommerce.ecommerce.modal.VerificationCode;
 import com.javafullstackEcommerce.ecommerce.repository.UserRepository;
-import com.javafullstackEcommerce.ecommerce.response.ApiResponse;
-import com.javafullstackEcommerce.ecommerce.response.AuthResponse;
-import com.javafullstackEcommerce.ecommerce.response.LoginRequest;
-import com.javafullstackEcommerce.ecommerce.response.SignupRequest;
+import com.javafullstackEcommerce.ecommerce.response.*;
 import com.javafullstackEcommerce.ecommerce.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -40,8 +37,8 @@ public class AuthController {
 
 
     @PostMapping("/sent/login-signup-otp")
-    public ResponseEntity<ApiResponse> sentOtpHandler(@RequestBody VerificationCode req) throws Exception {
-        authService.sendLoginOtp(req.getEmail());
+    public ResponseEntity<ApiResponse> sentOtpHandler(@RequestBody LoginOtpRequest req) throws Exception {
+        authService.sendLoginOtp(req.getEmail(),req.getRole());
 
         ApiResponse res= new ApiResponse();
 

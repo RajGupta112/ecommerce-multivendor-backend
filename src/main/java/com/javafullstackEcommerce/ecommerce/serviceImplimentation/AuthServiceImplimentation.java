@@ -3,9 +3,11 @@ package com.javafullstackEcommerce.ecommerce.serviceImplimentation;
 import com.javafullstackEcommerce.ecommerce.config.JwtProvider;
 import com.javafullstackEcommerce.ecommerce.domain.USER_ROLE;
 import com.javafullstackEcommerce.ecommerce.modal.Cart;
+import com.javafullstackEcommerce.ecommerce.modal.Seller;
 import com.javafullstackEcommerce.ecommerce.modal.User;
 import com.javafullstackEcommerce.ecommerce.modal.VerificationCode;
 import com.javafullstackEcommerce.ecommerce.repository.CartRepository;
+import com.javafullstackEcommerce.ecommerce.repository.SellerRepository;
 import com.javafullstackEcommerce.ecommerce.repository.UserRepository;
 import com.javafullstackEcommerce.ecommerce.repository.VerificationCodeRepository;
 import com.javafullstackEcommerce.ecommerce.response.AuthResponse;
@@ -46,17 +48,29 @@ public class AuthServiceImplimentation  implements AuthService {
 
     private final CustomUserServiceImplimentation customUserService;
 
+    private final SellerRepository sellerRepository;
+
 
 
     @Override
-    public void sendLoginOtp(String email) throws Exception {
- String SIGNING_PREFIX="sign_in";
+    public void sendLoginOtp(String email,USER_ROLE role) throws Exception {
+ String SIGNING_PREFIX="signing_";
 // String SELLER_PREFIX="seller_";
  if(email.startsWith(SIGNING_PREFIX)){
      email=email.substring(SIGNING_PREFIX.length());
-     User user= userRepository.findByEmail(email);
-     if(user==null){
-         throw  new Exception("user not exist with provided email");
+
+     if(role.equals(USER_ROLE.ROLE_SELLER)) {
+         Seller seller=sellerRepository.findByEmail(email);
+         if(seller==null){
+             throw new Exception("seller not found");
+         }
+
+
+     }else{
+         User user = userRepository.findByEmail(email);
+         if (user == null) {
+             throw new Exception("user not exist with provided email");
+         }
      }
  }
  VerificationCode isExist=verificationCodeRepository.findByEmail(email);

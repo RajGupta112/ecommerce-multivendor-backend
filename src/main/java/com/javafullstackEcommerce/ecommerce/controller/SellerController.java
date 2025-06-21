@@ -1,5 +1,6 @@
 package com.javafullstackEcommerce.ecommerce.controller;
 
+import com.javafullstackEcommerce.ecommerce.Exception.SellerException;
 import com.javafullstackEcommerce.ecommerce.config.JwtProvider;
 import com.javafullstackEcommerce.ecommerce.domain.AccountStatus;
 import com.javafullstackEcommerce.ecommerce.modal.Seller;
@@ -76,7 +77,7 @@ public class SellerController {
 
 
 @GetMapping("/{id}")
-    public ResponseEntity<Seller> getSellerById(@PathVariable Long id) throws Exception {
+    public ResponseEntity<Seller> getSellerById(@PathVariable Long id) throws SellerException {
         Seller seller=sellerService.getSellerById(id);
         return new ResponseEntity<>(seller,HttpStatus.OK);
 

@@ -1,5 +1,6 @@
 package com.javafullstackEcommerce.ecommerce.serviceImplimentation;
 
+import com.javafullstackEcommerce.ecommerce.Exception.SellerException;
 import com.javafullstackEcommerce.ecommerce.config.JwtProvider;
 import com.javafullstackEcommerce.ecommerce.modal.Seller;
 import com.javafullstackEcommerce.ecommerce.domain.AccountStatus;
@@ -52,10 +53,10 @@ public class SellerServiceImpl implements SellerService {
     }
 
     @Override
-    public Seller getSellerById(Long id) throws Exception {
+    public Seller getSellerById(Long id) throws SellerException {
 
         return sellerRepository.findById(id).
-                orElseThrow(()-> new Exception("seller not found with id "+id));
+                orElseThrow(()-> new SellerException("seller not found with id "+id));
     }
 
     @Override

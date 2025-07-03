@@ -114,8 +114,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> searchProduct() {
-        return List.of();
+    public List<Product> searchProduct(String query) {
+        return productRepository.search(query);
     }
 
     @Override
@@ -179,4 +179,6 @@ public class ProductServiceImpl implements ProductService {
 
         return productRepository.findBySellerId(sellerId);
     }
+
+
 }

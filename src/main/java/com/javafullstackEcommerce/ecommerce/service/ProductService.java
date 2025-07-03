@@ -14,7 +14,7 @@ public interface ProductService {
     public void deleteProduct(Long productId) throws ProductException;
     public Product updateProduct(Long productId, Product product) throws ProductException;
     public  Product findProductById(Long id) throws ProductException;
-    List<Product> searchProduct();
+    List<Product> searchProduct(String query);
     public Page<Product> getAllProducts(
             String category,
             String brand,
@@ -28,6 +28,7 @@ public interface ProductService {
             Integer pageNumber
     );
     List<Product> getProductBySellerId(Long sellerId);
+
 
 
 }

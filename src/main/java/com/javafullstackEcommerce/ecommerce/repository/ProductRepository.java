@@ -3,6 +3,8 @@ package com.javafullstackEcommerce.ecommerce.repository;
 import com.javafullstackEcommerce.ecommerce.modal.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -12,5 +14,12 @@ public interface ProductRepository extends JpaRepository<Product,Long>, JpaSpeci
 
 List<Product> findBySellerId(Long id);
 
+    @Query("SELECT p FROM Product p WHERE (:query IS NULL OR LOWER(p.title) " +
+            "LIKE LOWER(CONCAT('%', :query, '%'))) " +
+            "OR (:query IS NULL OR LOWER(p.category.name) " +
+            "LIKE LOWER(CONCAT('%', :query, '%'))) " +
+            "OR (:query IS NULL OR LOWER(p.category.categoryId) " +
+            "LIKE LOWER(CONCAT('%', :query, '%')))")
+List<Product> search(@Param("query") String query);
 
 }

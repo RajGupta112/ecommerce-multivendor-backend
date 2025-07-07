@@ -6,7 +6,7 @@ import com.javafullstackEcommerce.ecommerce.modal.Product;
 import com.javafullstackEcommerce.ecommerce.modal.Seller;
 import com.javafullstackEcommerce.ecommerce.repository.CategoryRepository;
 import com.javafullstackEcommerce.ecommerce.repository.ProductRepository;
-import com.javafullstackEcommerce.ecommerce.response.createProductReqest;
+import com.javafullstackEcommerce.ecommerce.response.CreateProductReqest;
 import com.javafullstackEcommerce.ecommerce.service.ProductService;
 import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.Predicate;
@@ -18,7 +18,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import javax.sound.sampled.Port;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,9 +29,9 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
      private final CategoryRepository categoryRepository;
     @Override
-    public Product createProduct(createProductReqest req, Seller seller) {
+    public Product createProduct(CreateProductReqest req, Seller seller) {
 
-        Category category1=categoryRepository.findByCategory(req.getCategory());
+        Category category1=categoryRepository.findByCategoryId(req.getCategory());
         if(category1==null){
             Category category= new Category();
             category.setCategoryId(req.getCategory());
@@ -40,7 +39,7 @@ public class ProductServiceImpl implements ProductService {
             category1=categoryRepository.save(category);
         }
 
-        Category category2=categoryRepository.findByCategory(req.getCategory2()
+        Category category2=categoryRepository.findByCategoryId(req.getCategory2()
         );
         if(category2==null){
             Category category= new Category();
@@ -50,7 +49,7 @@ public class ProductServiceImpl implements ProductService {
             category2=categoryRepository.save(category);
         }
 
-        Category category3= categoryRepository.findByCategory(req.getCategory3());
+        Category category3= categoryRepository.findByCategoryId(req.getCategory3());
 
         if(category3==null){
              Category category= new Category();

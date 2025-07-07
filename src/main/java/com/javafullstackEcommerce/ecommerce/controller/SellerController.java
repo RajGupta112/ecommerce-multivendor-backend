@@ -59,24 +59,31 @@ public class SellerController {
 
 
     @PostMapping()
-    public ResponseEntity<Seller> createSeller(@RequestBody Seller seller) throws Exception{
-        Seller savedSeller=sellerService.createSeller(seller);
+    public ResponseEntity<Seller> createSeller(@RequestBody Seller seller) throws Exception {
+        // Save the seller
+        Seller savedSeller = sellerService.createSeller(seller);
 
-        String otp= OtpUtil.generateOtp();
-        VerificationCode verificationCode= new VerificationCode();
+        // Generate OTP and save it
+        String otp = OtpUtil.generateOtp();
+        VerificationCode verificationCode = new VerificationCode();
         verificationCode.setOtp(otp);
         verificationCode.setEmail(seller.getEmail());
         verificationCodeRepository.save(verificationCode);
 
-        String subject = " OffMint Email Verification Code";
-        String text = "Welcome to OffMint, verify your account using this link ";
-        String frontend_url = "http://localhost:3000/verify-seller/";
-         emailService.sendVerificationOtpEmail(seller.getEmail(), verificationCode.getOtp(), subject,text+frontend_url);
-         return new ResponseEntity<>(savedSeller,HttpStatus.CREATED);
+        // Construct email content with OTP in the URL
+        String subject = "OffMint Email Verification Code";
+        String verificationLink = "http://localhost:3000/verify-seller/" + otp;
+        String text = "Welcome to OffMint, verify your account using this link: " + verificationLink;
+
+        // Send the email
+        emailService.sendVerificationOtpEmail(seller.getEmail(), otp, subject, text);
+
+        // Return response
+        return new ResponseEntity<>(savedSeller, HttpStatus.CREATED);
     }
 
 
-@GetMapping("/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Seller> getSellerById(@PathVariable Long id) throws SellerException {
         Seller seller=sellerService.getSellerById(id);
         return new ResponseEntity<>(seller,HttpStatus.OK);
@@ -96,13 +103,13 @@ public ResponseEntity<List<Seller>> getAllSeller(@RequestParam(required = false)
 }
 
 @PatchMapping
-public ResponseEntity<Seller> updateSeller(@RequestHeader("Authorization") String jwt,Seller seller) throws Exception {
+public ResponseEntity<Seller> updateSeller(@RequestHeader("Authorization") String jwt,@RequestBody  Seller seller) throws Exception {
         Seller profile=sellerService.getSellerProfile(jwt);
         Seller update=sellerService.updateSeller(profile.getId(),seller);
         return ResponseEntity.ok(update);
 }
 
-@DeleteMapping
+@DeleteMapping("/{id}")
 public ResponseEntity<Seller> deleteSeller(@PathVariable Long id) throws Exception {
       sellerService.deleteSeller(id);
       return ResponseEntity.noContent().build();

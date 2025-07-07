@@ -3,14 +3,14 @@ package com.javafullstackEcommerce.ecommerce.service;
 import com.javafullstackEcommerce.ecommerce.Exception.ProductException;
 import com.javafullstackEcommerce.ecommerce.modal.Product;
 import com.javafullstackEcommerce.ecommerce.modal.Seller;
-import com.javafullstackEcommerce.ecommerce.response.createProductReqest;
+import com.javafullstackEcommerce.ecommerce.response.CreateProductReqest;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
 
 public interface ProductService {
 
-    public Product createProduct(createProductReqest req, Seller seller);
+    public Product createProduct(CreateProductReqest req, Seller seller);
     public void deleteProduct(Long productId) throws ProductException;
     public Product updateProduct(Long productId, Product product) throws ProductException;
     public  Product findProductById(Long id) throws ProductException;

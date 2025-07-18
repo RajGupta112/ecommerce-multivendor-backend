@@ -1,6 +1,5 @@
 package com.javafullstackEcommerce.ecommerce.modal;
 
-import com.javafullstackEcommerce.ecommerce.domain.OrderStatus;
 import com.javafullstackEcommerce.ecommerce.domain.PaymentStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
